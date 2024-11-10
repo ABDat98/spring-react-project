@@ -6,13 +6,14 @@ import { AuthProvider } from './context/AuthContext';
 import App from './App';
 const element = document.getElementById('root');
 ReactDOM.createRoot(element!).render(
+    <QueryProvider>
     <AuthProvider>
     <BrowserRouter>
-            <QueryProvider>
                 <App />
-            </QueryProvider>
     </BrowserRouter>
     </AuthProvider>
+    </QueryProvider>
+
 
 
 );

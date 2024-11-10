@@ -21,6 +21,8 @@ export const registerUser = async (userData: IRegisterUser) => {
   return response.json(); // Return the response as JSON on success
 };
 
+
+
   export const loginUser = async (userData: ISignUser) => {
     try {
       debugger
@@ -51,6 +53,25 @@ export const registerUser = async (userData: IRegisterUser) => {
       throw error; // Rethrow the error for handling in the caller
     }
   };
+
+
+
+  export const fetchUserByToken = async () => {
+    const token = localStorage.getItem('token');
+
+    const response = await fetch('http://localhost:8080/api/v1/auth/me', {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    
+    if (!response.ok) {
+        throw new Error('Failed to fetch user');
+    }
+    
+    return response.json();
+};
+
 
   export const logout = async () => {
     localStorage.removeItem("token");

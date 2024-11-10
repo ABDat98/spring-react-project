@@ -9,7 +9,7 @@ import { Button } from '../ui/button'
 const LeftSidebar = () => {
   const { mutate: signOut, isSuccess } = useSignOutAccount()
   const { pathname } = useLocation();
-  const user = useUserContext()
+  const { user, isAuthenticated, logout } = useUserContext();
   console.log(user)
   const navigate = useNavigate()
   useEffect(() => {
@@ -23,7 +23,12 @@ const LeftSidebar = () => {
           <img src={  '/assets/icons/profile-placeholder.svg'} alt="" />
           <div className="flex flex-col">
             <p className="body-bold">
-                Abd Alatrash
+            {user ? (
+      <p>Welcome, {user.firstName} {user.lastName}!</p>
+    ) : (
+      <p>Loading user information...</p>
+    )}
+
             </p>
             <div className="small-regular text-light-3">
             Abd Alatrash
