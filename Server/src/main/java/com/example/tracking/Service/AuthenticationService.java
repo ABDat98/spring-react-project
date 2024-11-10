@@ -7,6 +7,7 @@ import com.example.tracking.Request.AuthenticationRequest;
 import com.example.tracking.Request.RegisterRequest;
 import com.example.tracking.Response.AuthenticationResponse;
 import com.example.tracking.config.JwtUtils;
+import com.example.tracking.dto.UserDto;
 import com.example.tracking.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -59,4 +60,25 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
+
+    public Optional<UserDto> getUserByToken(String token) {
+        try {
+            // Extract the username from the token
+            String email = jwtUtils.extractUsername(token);
+            // Find the user by username and convert to UserDto if found
+            return userRepository.findByEmail(email)
+                    .map(user -> new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getImage()));
+
+
+        }catch (Exception e) {
+            // Log the exception for debugging
+            System.err.println("Error while extracting user from token: " + e.getMessage());
+            e.printStackTrace();
+
+            // Return empty Optional if there was an issue with parsing the token or finding the user
+            return Optional.empty();
+        }
+    }
+
+
 }

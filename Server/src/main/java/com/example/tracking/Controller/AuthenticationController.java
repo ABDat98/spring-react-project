@@ -5,6 +5,9 @@ import com.example.tracking.Request.AuthenticationRequest;
 import com.example.tracking.Request.RegisterRequest;
 import com.example.tracking.Response.AuthenticationResponse;
 import com.example.tracking.Service.AuthenticationService;
+import com.example.tracking.dto.UserDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +38,17 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
 
         return ResponseEntity.ok(authenticationService.authenticate(request));
+    }
 
+    @GetMapping("/me")
+    public ResponseEntity<UserDto> getUserByToken(@RequestHeader("Authorization") String authHeader) throws JsonProcessingException {
+        String token = authHeader.replace("Bearer ", "");
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> map = mapper.readValue(token, Map.class);
+        String tokent = map.get("token");
 
+        return authenticationService.getUserByToken(tokent)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 }

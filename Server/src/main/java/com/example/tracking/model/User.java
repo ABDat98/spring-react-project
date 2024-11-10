@@ -30,6 +30,8 @@ public class User implements UserDetails {
     private String password;
     private String firstName;
     private String lastName;
+    @Lob
+    private byte[] image;
     @Enumerated(EnumType.STRING)
     private Role role;
 
