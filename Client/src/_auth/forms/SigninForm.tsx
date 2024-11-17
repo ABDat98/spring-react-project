@@ -66,9 +66,8 @@ const SigninForm = () => {
   return (
     <Form {...form}>
       <div className="sm:w-420  flex-center flex-col">
-        <img src="/assets/images/logo.svg" alt="logo" />
-        <h2 className='h3-bold sm:h2-bold pt-6 sm:pt-2'>Log in to your account</h2>
-        <p className='text-light-3 text-lg	mt-4 sm:mt-2 sm:text-base	'>Welcome back. Please enter your details</p>
+        <h2 className='text-dark-1 h3-bold sm:h2-bold pt-6 sm:pt-2'>Log in to your account</h2>
+        <p className='text-gray-500 text-lg	mt-4 sm:mt-2 sm:text-base	'>Welcome back. Please enter your details</p>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full mt-4 ">
            <FormField
             control={form.control}
@@ -90,7 +89,7 @@ const SigninForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type='password' className='shad-input' {...field} />
+                  <Input type='password' className='shad-input text-dark-1' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -103,7 +102,7 @@ const SigninForm = () => {
               </div>
             ): 'signin' }
           </Button>
-          <p className="text-sm text-light-2 text-center mt-2">
+          <p className="text-sm text-gray-500 text-center mt-2">
             Don't have an account ?  <Link to="/sign-up" className='text-primary-500 ml-1 text-small-semibold	'>Sign up</Link>
           </p>
         </form>
