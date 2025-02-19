@@ -54,9 +54,9 @@
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
             http
-                    .csrf(csrf -> csrf.disable())  // Disable CSRF for stateless API
+                    .csrf(AbstractHttpConfigurer::disable)  // Disable CSRF for stateless API
                     .authorizeHttpRequests(authz -> authz
-                            .requestMatchers("/api/v1/auth/**").permitAll()  // Allow all requests to auth endpoints
+                            .requestMatchers("/api/v1/auth/**", "/categories/**").permitAll()  // Allow all requests to auth endpoints
                             .anyRequest().authenticated()  // Require authentication for any other requests
                     )
                     .sessionManagement(session -> session

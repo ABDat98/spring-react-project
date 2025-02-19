@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,10 +23,14 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    private final UserService userDetailsService;
-    private final JwtUtils jwtUtils;
+    @Autowired
+    private  UserService userDetailsService;
+
+    @Autowired
+    private  JwtUtils jwtUtils;
 
     @Override
+
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
@@ -33,10 +38,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         final String userEmail;
         final String jwtToken;
 
-        if (request.getServletPath().contains("/api/v1/auth")) {
+        // Skip authentication for public endpoints like /api/v1/auth and /categories
+        if (request.getServletPath().startsWith("/api/v1/auth") || request.getServletPath().startsWith("/categories")) {
             filterChain.doFilter(request, response);
             return;
         }
+
+
 
         if (authHeader == null || !authHeader.startsWith("Bearer")) {
             filterChain.doFilter(request, response);

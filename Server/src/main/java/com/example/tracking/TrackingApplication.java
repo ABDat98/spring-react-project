@@ -14,7 +14,6 @@ public class TrackingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TrackingApplication.class, args);
 	}
-
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 		return authenticationConfiguration.getAuthenticationManager();

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot with Pebble and Tailwind CSS</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+
+</head>
+<body class="font-sans bg-gray-100">
+
+<!-- Header Section -->
+<header class="bg-blue-600 text-white p-4">
+    <nav>
+        <ul class="flex space-x-4">
+            <li><a href="/" th:text="'Home'"></a></li>
+            <li><a href="/categories" th:text="'Categories'"></a></li>
+            <li><a href="/products" th:text="'Products'"></a></li>
+            <li><a href="/login" th:text="'Login'"></a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content Section -->
+<main class="container mx-auto p-6">
+    <div th:replace="${body}"></div> <!-- This is where the page-specific content will be injected -->
+</main>
+
+<!-- Footer Section -->
+<footer class="bg-blue-600 text-white p-4 text-center">
+    <p>My Application © 2025</p>
+</footer>
+
+</body>
+</html>
