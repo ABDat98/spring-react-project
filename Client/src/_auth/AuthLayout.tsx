@@ -10,10 +10,11 @@ const AuthLayout = () => {
         <Navigate to="/" />
       ) : (
         <>
-          <section className='flex flex-1 justify-center items-center flex-col py-10'>
+           <img src="/assets/images/cover-6.png" alt="logo" className='hidden xl:block h-screen w-2/3 object-cover bg-no-repeat' />
+
+          <section className='flex flex-1  bg-light-1 justify-center items-center flex-col py-10'>
             <Outlet></Outlet>
           </section>
-          <img src="/assets/images/Portfolio-Templates.jpg" alt="logo" className='hidden xl:block h-screen w-1/2 object-cover bg-no-repeat' />
         </>
       )}
     </>

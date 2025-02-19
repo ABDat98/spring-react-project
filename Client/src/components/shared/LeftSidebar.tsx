@@ -16,23 +16,21 @@ const LeftSidebar = () => {
     if (isSuccess) navigate(0);
   }, [isSuccess])
   return (
-    <nav className="leftsidebar bg-red">
+    <nav className="leftsidebar">
       <div className="flex flex-col gap-11 ">
-        
-        <Link to={`/profile/2`} className='flex gap-3 items-center'>
-          <img src={  '/assets/icons/profile-placeholder.svg'} alt="" />
+
+        <Link to={`/profile/2`} className='flex gap-3 items-center border-b border-gray-1 pb-5'>
+          <img src={'/assets/icons/logo.svg'} alt="" />
           <div className="flex flex-col">
             <p className="body-bold">
-            {user ? (
-      <p>Welcome, {user.firstName} {user.lastName}!</p>
-    ) : (
-      <p>Loading user information...</p>
-    )}
+              {user ? (
+                <p>Alatrash Market!</p>
+              ) : (
+                <p>Loading user information...</p>
+              )}
 
             </p>
-            <div className="small-regular text-light-3">
-            Abd Alatrash
-            </div>
+           
           </div>
         </Link>
         <ul className="flex flex-col gap-6">
@@ -40,7 +38,7 @@ const LeftSidebar = () => {
             const isActive = pathname === link.route
             console.log(pathname)
             return (
-              <li key={link.label} className={`leftsidebar-link group ${isActive && 'bg-primary-500'}`}>
+              <li key={link.label} className={`leftsidebar-link group ${isActive && 'bg-primary text-white'}`}>
                 <NavLink to={link.route} className="flex p-4 gap-4 items-center" >
                   <img className={`group-hover:invert-white ${isActive && 'invert-white'}`} src={link.imgURL} alt="" />
                   {link.label}</NavLink>
@@ -49,10 +47,13 @@ const LeftSidebar = () => {
           })}
         </ul>
       </div>
-      <Button variant="ghost" className='shad-button_ghost' onClick={() => signOut()}>
-        <img src="/assets/icons/logout.svg" alt="logout" />
-        <p className='small-medium lg:base-medium'>Logout</p>
-      </Button>
+      <div className='flex flex-col gap-6'>
+
+        <Button variant="ghost" className='shad-button_ghost' onClick={() => signOut()}>
+          <img src="/assets/icons/logout.svg" alt="logout" />
+          <p className='small-medium lg:base-medium'>Logout</p>
+        </Button>
+      </div>
     </nav>
   )
 }

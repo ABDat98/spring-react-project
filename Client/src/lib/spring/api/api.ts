@@ -25,7 +25,6 @@ export const registerUser = async (userData: IRegisterUser) => {
 
   export const loginUser = async (userData: ISignUser) => {
     try {
-      debugger
       const response = await fetch("http://localhost:8080/api/v1/auth/authenticate", {
         method: 'POST',
         headers: {

@@ -6,10 +6,6 @@ export type INavLink = {
     label: string;
   };
   
- 
-  
- 
-  
 
  
   export type INewUser = {

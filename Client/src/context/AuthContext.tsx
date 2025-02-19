@@ -20,7 +20,7 @@ const AuthContext = createContext({
     const [user, setUser] = useState(null);
     const { data: userData, isLoading: fetchingUser, error } = useFetchUserByToken();
 
-
+    console.log(userData)
    // Consolidate authentication and loading logic into one effect
    useEffect(() => {
     const token = localStorage.getItem("token");
